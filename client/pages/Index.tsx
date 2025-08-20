@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Calendar, MapPin, Clock, Users, Gift } from "lucide-react";
+import photo1 from "./photo/photo_2025-08-20_17-17-59.jpg";
+import photo2 from "./photo/photo_2025-08-20_17-18-12.jpg";
+import photo3 from "./photo/photo_2023-09-20_23-23-44.jpg";
 
 export default function Index() {
   const [timeUntilWedding, setTimeUntilWedding] = useState<{
@@ -11,8 +14,9 @@ export default function Index() {
     seconds: number;
   }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  // Wedding date - update this to the actual date
-  const weddingDate = new Date("2024-08-15T16:00:00");
+  const [rsvpClicked, setRsvpClicked] = useState(false);
+
+  const weddingDate = new Date("2030-02-24T16:00:00");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,208 +32,131 @@ export default function Index() {
         setTimeUntilWedding({ days, hours, minutes, seconds });
       }
     }, 1000);
-
+    
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-wedding-cream via-white to-wedding-blush">
+    <div className="relative min-h-screen bg-gradient-to-br from-pink-100 via-white to-rose-100 overflow-hidden">
+
+      {/* Floating Hearts */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-3 h-3 bg-pink-300 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-wedding-sage/20 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <Heart className="h-6 w-6 text-wedding-rose" />
-              <span className="text-2xl font-serif text-gray-800">
-                Sarah & Michael
-              </span>
-            </div>
-            <div className="hidden md:flex items-center gap-8">
+      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-rose-200 z-50">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Heart className="h-6 w-6 text-rose-500 animate-pulse" />
+            <span className="text-2xl font-serif text-gray-800">Sreykaa & Ratana</span>
+          </div>
+          <div className="hidden md:flex items-center gap-8">
+            {["home","story","details","response","registry"].map((sec) => (
               <a
-                href="#home"
-                className="text-gray-700 hover:text-wedding-rose transition-colors"
+                key={sec}
+                href={`#${sec}`}
+                className="text-gray-700 hover:text-rose-500 transition-colors font-medium"
               >
-                Home
+                {sec.charAt(0).toUpperCase() + sec.slice(1).replace("-", " ")}
               </a>
-              <a
-                href="#story"
-                className="text-gray-700 hover:text-wedding-rose transition-colors"
-              >
-                Our Story
-              </a>
-              <a
-                href="#details"
-                className="text-gray-700 hover:text-wedding-rose transition-colors"
-              >
-                Details
-              </a>
-              <a
-                href="#rsvp"
-                className="text-gray-700 hover:text-wedding-rose transition-colors"
-              >
-                RSVP
-              </a>
-              <a
-                href="#registry"
-                className="text-gray-700 hover:text-wedding-rose transition-colors"
-              >
-                Registry
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-serif text-gray-800 mb-4">
-              Sarah <span className="text-wedding-rose">&</span> Michael
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-2">
-              are getting married!
-            </p>
-            <p className="text-lg text-gray-500">
-              August 15th, 2024 • Napa Valley, California
-            </p>
-          </div>
+      <section id="home" className="pt-28 pb-20 px-6 text-center">
+        <h1 className="text-6xl md:text-8xl font-serif text-gray-800 mb-4 animate-fadeIn">
+          Sreykaa <span className="text-rose-500">&</span> Ratana
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-600 mb-2 animate-fadeIn delay-200">
+          are getting married!
+        </p>
+        <p className="text-lg text-gray-500 mb-8 animate-fadeIn delay-400">
+          February 24th, 2030 • Phnom Penh, Cambodia
+        </p>
 
-          {/* Countdown Timer */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-12">
-            <Card className="bg-white/60 backdrop-blur-sm border-wedding-sage/30">
+        {/* Countdown */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-12">
+          {Object.entries(timeUntilWedding).map(([unit, value]) => (
+            <Card
+              key={unit}
+              className="bg-white/60 backdrop-blur-sm border-rose-200/50 transform hover:scale-105 transition-transform duration-500"
+            >
               <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-wedding-rose">
-                  {timeUntilWedding.days}
-                </div>
-                <div className="text-sm text-gray-600">Days</div>
+                <div className="text-3xl font-bold text-rose-500">{value}</div>
+                <div className="text-sm text-gray-600 capitalize">{unit}</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/60 backdrop-blur-sm border-wedding-sage/30">
-              <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-wedding-rose">
-                  {timeUntilWedding.hours}
-                </div>
-                <div className="text-sm text-gray-600">Hours</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/60 backdrop-blur-sm border-wedding-sage/30">
-              <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-wedding-rose">
-                  {timeUntilWedding.minutes}
-                </div>
-                <div className="text-sm text-gray-600">Minutes</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/60 backdrop-blur-sm border-wedding-sage/30">
-              <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-wedding-rose">
-                  {timeUntilWedding.seconds}
-                </div>
-                <div className="text-sm text-gray-600">Seconds</div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Button
-            size="lg"
-            className="bg-wedding-rose hover:bg-wedding-rose/90 text-white px-8 py-3 text-lg rounded-full"
-          >
-            RSVP Now
-          </Button>
+          ))}
         </div>
       </section>
 
-      {/* Our Story Section */}
-      <section id="story" className="py-16 px-4 bg-white/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-serif text-gray-800 mb-8">
+      {/* Our Story */}
+      <section id="story" className="py-20 px-6 bg-white/50">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl font-serif text-gray-800 mb-12 animate-fadeIn">
             Our Love Story
           </h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-gray-600 leading-relaxed">
-                We met during a rainy autumn morning at a cozy coffee shop in
-                downtown Portland. Michael was reading a book about astronomy,
-                and Sarah couldn't help but notice the constellation bookmark
-                peeking out from the pages.
+          <div className="md:grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6 text-left">
+              <p className="text-gray-600 leading-relaxed animate-fadeIn delay-200">
+                We met during a game of Mobile Legend. Sreykaa was on the enemy team, Ratana on the opposite. After a fierce battle, we started chatting and realized how much we had in common.
               </p>
-              <p className="text-gray-600 leading-relaxed">
-                Three years, countless adventures, and one magical proposal
-                under the northern lights later, we're ready to begin our
-                greatest journey together as husband and wife.
+              <p className="text-gray-600 leading-relaxed animate-fadeIn delay-400">
+                Three years later, countless adventures, and a magical proposal under the northern lights, we're ready to begin our greatest journey together.
               </p>
             </div>
-            <div className="bg-wedding-blush/30 rounded-lg h-64 flex items-center justify-center">
-              <Heart className="h-16 w-16 text-wedding-rose" />
+            <div className="grid grid-cols-3 gap-2 rounded-lg overflow-hidden animate-fadeIn delay-600">
+              <img src={photo1} className="w-full h-48 object-cover rounded-lg" />
+              <img src={photo2} className="w-full h-48 object-cover rounded-lg" />
+              <img src={photo3} className="w-full h-48 object-cover rounded-lg" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Wedding Details */}
-      <section id="details" className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-serif text-gray-800 text-center mb-12">
-            Wedding Details
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Ceremony */}
-            <Card className="bg-white/80 backdrop-blur-sm border-wedding-sage/30">
+      <section id="details" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-serif text-gray-800 mb-12">Wedding Details</h2>
+          <div className="md:grid md:grid-cols-2 gap-8">
+            <Card className="bg-white/80 backdrop-blur-sm border-rose-200/50 hover:shadow-xl transition-shadow">
               <CardContent className="p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <Heart className="h-6 w-6 text-wedding-rose" />
-                  <h3 className="text-2xl font-serif text-gray-800">
-                    Ceremony
-                  </h3>
+                  <Heart className="h-6 w-6 text-rose-500" />
+                  <h3 className="text-2xl font-serif text-gray-800">Ceremony</h3>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <Calendar className="h-5 w-5" />
-                    <span>Saturday, August 15th, 2024</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <Clock className="h-5 w-5" />
-                    <span>4:00 PM</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <MapPin className="h-5 w-5" />
-                    <span>
-                      Silverado Resort & Spa
-                      <br />
-                      1600 Atlas Peak Rd, Napa, CA 94558
-                    </span>
-                  </div>
+                <div className="space-y-3 text-gray-600">
+                  <div className="flex items-center gap-3"><Calendar className="h-5 w-5" /> Sunday, February 24th, 2030</div>
+                  <div className="flex items-center gap-3"><Clock className="h-5 w-5" /> 4:00 PM</div>
+                  <div className="flex items-center gap-3"><MapPin className="h-5 w-5" /> The Premier Center, Phnom Penh</div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Reception */}
-            <Card className="bg-white/80 backdrop-blur-sm border-wedding-sage/30">
+            <Card className="bg-white/80 backdrop-blur-sm border-rose-200/50 hover:shadow-xl transition-shadow">
               <CardContent className="p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <Users className="h-6 w-6 text-wedding-rose" />
-                  <h3 className="text-2xl font-serif text-gray-800">
-                    Reception
-                  </h3>
+                  <Users className="h-6 w-6 text-rose-500" />
+                  <h3 className="text-2xl font-serif text-gray-800">Reception</h3>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <Calendar className="h-5 w-5" />
-                    <span>Saturday, August 15th, 2024</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <Clock className="h-5 w-5" />
-                    <span>6:00 PM - 11:00 PM</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <MapPin className="h-5 w-5" />
-                    <span>
-                      Same venue - Outdoor Pavilion
-                      <br />
-                      Dinner, dancing & celebration!
-                    </span>
-                  </div>
+                <div className="space-y-3 text-gray-600">
+                  <div className="flex items-center gap-3"><Calendar className="h-5 w-5" /> Sunday, February 24th, 2030</div>
+                  <div className="flex items-center gap-3"><Clock className="h-5 w-5" /> 6:00 PM - 11:00 PM</div>
+                  <div className="flex items-center gap-3"><MapPin className="h-5 w-5" /> Same venue - Outdoor Pavilion, Dinner & Celebration</div>
                 </div>
               </CardContent>
             </Card>
@@ -237,66 +164,71 @@ export default function Index() {
         </div>
       </section>
 
-      {/* RSVP Section */}
-      <section id="rsvp" className="py-16 px-4 bg-wedding-sage/10">
+      {/* Response Section */}
+      <section id="response" className="py-16 px-4 bg-wedding-sage/10">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl font-serif text-gray-800 mb-8">RSVP</h2>
+          <h2 className="text-4xl font-serif text-gray-800 mb-8">Response</h2>
           <p className="text-gray-600 mb-8 text-lg">
-            We can't wait to celebrate with you! Please respond by June 15th,
-            2024.
+            We can't wait to celebrate with you! Please respond by February 20th, 2030.
           </p>
-          <div className="space-y-4">
+
+          {rsvpClicked ? (
+            <p className="text-xl font-semibold text-wedding-rose">
+              Thank you for your Response!
+            </p>
+          ) : (
             <Button
               size="lg"
-              className="bg-wedding-rose hover:bg-wedding-rose/90 text-white px-8 py-3 text-lg rounded-full w-full md:w-auto"
+              className="bg-rose-500 hover:bg-rose-400 text-white px-8 py-3 rounded-full text-lg transition-all transform hover:scale-105 animate-bounce"
+              onClick={() => setRsvpClicked(true)}
             >
-              Yes, I'll be there!
+              Yes, I will attend!
+              <Heart className="h-5 w-5 ml-2 inline-block" />
             </Button>
-            <div className="text-sm text-gray-500">
-              Questions? Contact us at sarah.michael.wedding@email.com
-            </div>
+            
+          )}
+
+          <div className="text-sm text-gray-500 mt-4">
+            Questions? Contact us at sreykaa.ratana.wedding@email.com
           </div>
         </div>
       </section>
 
-      {/* Registry Section */}
-      <section id="registry" className="py-16 px-4">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl font-serif text-gray-800 mb-8">
-            Wedding Registry
-          </h2>
-          <p className="text-gray-600 mb-8 text-lg">
-            Your presence is the greatest gift, but if you'd like to celebrate
-            with a gift, we've registered at a few of our favorite places.
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-wedding-rose text-wedding-rose hover:bg-wedding-rose hover:text-white"
-            >
-              <Gift className="h-5 w-5 mr-2" />
-              View Registry
-            </Button>
-          </div>
-        </div>
+      {/* Registry */}
+      <section id="registry" className="py-20 px-6 text-center">
+        <h2 className="text-4xl font-serif text-gray-800 mb-8">Wedding Registry</h2>
+        <p className="text-gray-600 mb-8 text-lg">
+          Your presence is the greatest gift, but if you'd like to celebrate with a gift, we've registered at a few of our favorite places.
+        </p>
+        <Button variant="outline" className="border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white px-6 py-3 rounded-full flex items-center justify-center mx-auto">
+          <Gift className="h-5 w-5 mr-2" /> View Registry
+        </Button>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 bg-wedding-sage/20 text-center">
-        <div className="max-w-2xl mx-auto">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Heart className="h-5 w-5 text-wedding-rose" />
-            <span className="text-lg font-serif text-gray-700">
-              Sarah & Michael
-            </span>
-            <Heart className="h-5 w-5 text-wedding-rose" />
-          </div>
-          <p className="text-gray-600 text-sm">
-            August 15th, 2024 • Napa Valley, California
-          </p>
+      <footer className="py-12 px-6 bg-rose-100 text-center">
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <Heart className="h-5 w-5 text-rose-500 animate-pulse" />
+          <span className="text-lg font-serif text-gray-700">Sreykaa & Ratana</span>
+          <Heart className="h-5 w-5 text-rose-500 animate-pulse" />
         </div>
+        <p className="text-gray-600 text-sm">February 24th, 2030 • Phnom Penh, Cambodia</p>
       </footer>
+
+      {/* Animations */}
+      <style>{`
+        @keyframes float {
+          0% { transform: translateY(0); opacity: 0.7; }
+          50% { transform: translateY(-20px); opacity: 1; }
+          100% { transform: translateY(0); opacity: 0.7; }
+        }
+        .animate-float { animation: float infinite ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fadeIn { animation: fadeIn 1s forwards; }
+        .animate-fadeIn.delay-200 { animation-delay: 0.2s; }
+        .animate-fadeIn.delay-400 { animation-delay: 0.4s; }
+        .animate-fadeIn.delay-600 { animation-delay: 0.6s; }
+      `}</style>
     </div>
   );
 }
