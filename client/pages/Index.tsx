@@ -5,6 +5,8 @@ import { Heart, Calendar, MapPin, Clock, Users, Gift } from "lucide-react";
 import photo1 from "./photo/photo_2025-08-20_17-17-59.jpg";
 import photo2 from "./photo/photo_2025-08-20_17-18-12.jpg";
 import photo3 from "./photo/photo_2023-09-20_23-23-44.jpg";
+import sreykaa from "./photo/photo_2025-08-21_11-00-22.jpg";
+import ratana from "./photo/photo_2025-08-21_11-00-33.jpg";
 
 export default function Index() {
   const [timeUntilWedding, setTimeUntilWedding] = useState<{
@@ -79,10 +81,10 @@ export default function Index() {
       {/* Hero Section */}
       <section id="home" className="pt-28 pb-20 px-6 text-center">
         <h1 className="text-6xl md:text-8xl font-serif text-gray-800 mb-4 animate-fadeIn">
-          Sreykaa <span className="text-rose-500">&</span> Ratana
+          Hout Sreykaa <span className="text-rose-500"><br />& <br /></span> Soy Chanratana
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 mb-2 animate-fadeIn delay-200">
-          are getting married!
+          are getting engaged!
         </p>
         <p className="text-lg text-gray-500 mb-8 animate-fadeIn delay-400">
           February 24th, 2030 • Phnom Penh, Cambodia
@@ -104,6 +106,32 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Our Photo */}
+      <section>
+        <div className="flex items-center justify-center gap-8 max-w-2xl mx-auto mb-12">
+          <div className="relative group">
+            <img
+              src={sreykaa}
+              className="w-40 h-40 object-cover rounded-full border-4 border-rose-200 shadow-lg transition-transform duration-300 group-hover:scale-105"
+              alt="Sreykaa"
+            />
+            <span className="block mt-2 text-center text-gray-700 font-serif text-lg">Sreykaa</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <Heart className="h-16 w-16 text-rose-400 drop-shadow-lg animate-pulse" />
+            <span className="text-2xl font-serif text-rose-400 mt-2">&</span>
+          </div>
+          <div className="relative group">
+            <img
+              src={ratana}
+              className="w-40 h-40 object-cover rounded-full border-4 border-rose-200 shadow-lg transition-transform duration-300 group-hover:scale-105"
+              alt="Ratana"
+            />
+            <span className="block mt-2 text-center text-gray-700 font-serif text-lg">Ratana</span>
+          </div>
+        </div>
+      </section>
+
       {/* Our Story */}
       <section id="story" className="py-20 px-6 bg-white/50">
         <div className="max-w-5xl mx-auto text-center">
@@ -113,10 +141,7 @@ export default function Index() {
           <div className="md:grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 text-left">
               <p className="text-gray-600 leading-relaxed animate-fadeIn delay-200">
-                We met during a game of Mobile Legend. Sreykaa was on the enemy team, Ratana on the opposite. After a fierce battle, we started chatting and realized how much we had in common.
-              </p>
-              <p className="text-gray-600 leading-relaxed animate-fadeIn delay-400">
-                Three years later, countless adventures, and a magical proposal under the northern lights, we're ready to begin our greatest journey together.
+                Who would have thought that a simple visit to a café would change our lives forever? One unexpected glance across the room, and in that instant, the world seemed to disappear. From that magical beginning came three unforgettable years of laughter, adventures, and love deeper than we ever imagined. And under the breathtaking northern lights, a proposal turned our story into a forever—now, with hearts full of wonder, we are ready for the greatest journey of our lives together.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-2 rounded-lg overflow-hidden animate-fadeIn delay-600">
@@ -131,7 +156,7 @@ export default function Index() {
       {/* Wedding Details */}
       <section id="details" className="py-20 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-serif text-gray-800 mb-12">Wedding Details</h2>
+          <h2 className="text-4xl font-serif text-gray-800 mb-12">Engagement Details</h2>
           <div className="md:grid md:grid-cols-2 gap-8">
             <Card className="bg-white/80 backdrop-blur-sm border-rose-200/50 hover:shadow-xl transition-shadow">
               <CardContent className="p-8">
@@ -142,7 +167,7 @@ export default function Index() {
                 <div className="space-y-3 text-gray-600">
                   <div className="flex items-center gap-3"><Calendar className="h-5 w-5" /> Sunday, February 24th, 2030</div>
                   <div className="flex items-center gap-3"><Clock className="h-5 w-5" /> 4:00 PM</div>
-                  <div className="flex items-center gap-3"><MapPin className="h-5 w-5" /> The Premier Center, Phnom Penh</div>
+                  <div className="flex items-center gap-3"><MapPin className="h-5 w-5" /> Hyatt Regency Phnom Penh</div>
                 </div>
               </CardContent>
             </Card>
@@ -194,14 +219,25 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Registry */}
+      {/* Registry (changed to View Location) */}
       <section id="registry" className="py-20 px-6 text-center">
-        <h2 className="text-4xl font-serif text-gray-800 mb-8">Wedding Registry</h2>
+        <h2 className="text-4xl font-serif text-gray-800 mb-8">Engagement Location</h2>
         <p className="text-gray-600 mb-8 text-lg">
-          Your presence is the greatest gift, but if you'd like to celebrate with a gift, we've registered at a few of our favorite places.
+          We would be honored to celebrate with you at our engagement venue. Click below to view the location and directions.
         </p>
-        <Button variant="outline" className="border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white px-6 py-3 rounded-full flex items-center justify-center mx-auto">
-          <Gift className="h-5 w-5 mr-2" /> View Registry
+        <Button
+          asChild
+          variant="outline"
+          className=" border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white px-6 py-3 rounded-full flex items-center justify-center mx-auto"
+          style={{ width: "180px", minWidth: "150px", maxWidth: "200px" }}
+        >
+          <a
+            href="https://maps.app.goo.gl/hYbSZX6gdAb5naTKA?g_st=ipc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MapPin className="h-5 w-5 mr-2" /> View Location
+          </a>
         </Button>
       </section>
 
